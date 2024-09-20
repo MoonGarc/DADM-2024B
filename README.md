@@ -1,6 +1,6 @@
 <center>
-<img src= "./md/images/ITGAMBanner.png" alt">
-<center/>
+<img src= "./md/images/ITGAMBanner.png" alt= Itgam Banner">
+</center>
 
 # Shopping cart 🛒 Project 
 
