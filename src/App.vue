@@ -8,13 +8,17 @@ const items = ref ([
 {id: '2', label: '1 Chelas'},
 {id: '3', label: '1 nutella'},
 ]);
+const newItem= ref('');
 </script>
 
 <template>
 <h1> 
-    <i class="material-icons shopping-cart-icon"> local_mall</i>
+        <i class="material-icons shopping-cart-icon"> local_mall</i>
     {{ header }} 
-    </h1>
+    
+</h1>
+<input v-model="newItem" type="text"
+     placeholder="Agregar articulo"> {{ newItem }}
     <ul>
         <li v-for="item in items" :key = "item.id">🛍{{ item.label }} </li>
     </ul>
