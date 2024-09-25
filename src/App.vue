@@ -8,19 +8,22 @@ const items = ref ([
 {id: '2', label: '1 Chelas'},
 {id: '3', label: '1 nutella'},
 ]);
-const newItem= ref('');
+const newItem = ref('');
+const newItemPriority = ref('low');
 </script>
 
 <template>
 <h1> 
-        <i class="material-icons shopping-cart-icon"> local_mall</i>
+    <i class="material-icons shopping-cart-icon"> local_mall</i>
     {{ header }} 
-    
-</h1>
-<input v-model="newItem" type="text"
-     placeholder="Agregar articulo"> {{ newItem }}
+    </h1>
+    <input v-model.lazy="newItem" type="text" placeholder="Agregar Articulo">
+    <!--Radio Buttons-->
+    <label><input type="radio" value="low" v-model="newItemPriority">baja</label>
+    <label><input type="radio" value="high" v-model="newItemPriority">alta</label>
+    {{ newItemPriority == 'low' ? '🧊' : '🔥' }}    
     <ul>
-        <li v-for="item in items" :key = "item.id">🛍{{ item.label }} </li>
+        <li v-for= "({id, label}, i) in items" :key = "id">{{i+1}} {{ i%2==0?'🎇': '👜'}} {{ label }} </li>
     </ul>
 </template>
 
