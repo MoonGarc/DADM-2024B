@@ -5,16 +5,13 @@
     </h1>
     <input type="text" placeholder="Add Item" v-model.trim="newItem">
     
-    <!-- Radio Buttons -->
+    <!-- Checkbox para Alta Prioridad -->
     <label>
-      <input type="radio" v-model="newItemPriority" value="low">Low
-    </label>
-    <label>
-      <input type="radio" v-model="newItemPriority" value="high">High
+      <input type="checkbox" v-model="newItemHighPriority">High Priority
     </label>
   
     {{ newItem }}
-    <p>{{ newItemPriority }}</p>
+    <p>{{ newItemHighPriority }}</p>
   
     <ul>
       <li v-for="{ id, label } in items" v-bind:key="id">
@@ -34,7 +31,7 @@
     { id: '3', label: '1 nutella' },
   ]);
   const newItem = ref('');
-  const newItemPriority = ref('low');
+  const newItemHighPriority = ref(false);
   </script>
   
   <style scoped>
