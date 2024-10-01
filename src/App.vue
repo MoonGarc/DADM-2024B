@@ -11,50 +11,37 @@ const items = ref([
 ]);
 const newItem = ref("");
 const newItemHighPriority = ref(false);
-
-// Función para agregar un nuevo artículo a la lista
-const addItem = () => {
-  if (newItem.value.trim() !== "") {
-    const label = newItemHighPriority.value
-      ? `⚡ ${newItem.value}` // Añadir un icono de alta prioridad si está marcado
-      : newItem.value;
-    items.value.push({
-      id: items.value.length + 1,
-      label: label,
-    });
-    newItem.value = ""; // Limpiar el campo de entrada
-    newItemHighPriority.value = false; // Resetear la prioridad
-  }
-};
 </script>
 
 <template>
   <h1>{{ header }}</h1>
   
-  <!-- Agrupando entradas de usuario -->
-  <div class="add-item form">
+  <!-- Agrupando en un div las entradas -->
+  <form v-on:submit="items.push({ id: items.length + 1, label: newItem })" class="add-item form">
     <!-- Entrada de texto -->
-    <input 
-      type="text" 
-      placeholder="Add Item" 
-      v-on:keyup.enter="addItem" 
-      v-model.trim="newItem" />
+    <input
+      v-model.trim="newItem"
+      type="text"
+      placeholder="Add Item"
+    />
     
     <!-- Caja de selección de prioridad -->
     <label>
-      <input type="checkbox" v-model="newItemHighPriority" /> Alta Prioridad
+      <input type="checkbox" v-model="newItemHighPriority" />
+      High Priority
     </label>
     
     <!-- Botón -->
-    <button 
-      class="btn btn-primary" 
-      v-on:click="addItem">
-      Salvar Artículo
+    <button
+      class="btn btn-primary"
+    >
+      Save Item
     </button>
-  </div>
+  </form>
 
   <!-- Lista -->
   <ul>
     <li v-for="({ id, label }) in items" :key="id">⚜ {{ label }}</li>
   </ul>
 </template>
+
