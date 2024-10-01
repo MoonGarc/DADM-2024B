@@ -5,14 +5,29 @@
     </h1>
     <input type="text" placeholder="Add Item" v-model.trim="newItem">
     
-    <!-- Checkbox para Alta Prioridad -->
+    <!-- Caja de seleccion de prioridad -->
     <label>
-      <input type="checkbox" v-model="newItemHighPriority">High Priority
+      <input type="checkbox" v-model="newItemHighPriority">
+      High Priority
+    </label>
+    
+    <!-- Helados -->
+    <label>
+      <input type="checkbox" v-model="iceCreamFlavors" value="vanilla">
+      Vanilla
+    </label>
+    <label>
+      <input type="checkbox" v-model="iceCreamFlavors" value="chocolate">
+      Chocolate
+    </label>
+    <label>
+      <input type="checkbox" v-model="iceCreamFlavors" value="strawberry">
+      Strawberry
     </label>
   
-    {{ newItem }}
-    <p>{{ newItemHighPriority }}</p>
+    {{ iceCreamFlavors }}
   
+    <!-- Lista -->
     <ul>
       <li v-for="{ id, label } in items" v-bind:key="id">
         ⚜ {{ label }}
@@ -32,6 +47,7 @@
   ]);
   const newItem = ref('');
   const newItemHighPriority = ref(false);
+  const iceCreamFlavors = ref([]);
   </script>
   
   <style scoped>
