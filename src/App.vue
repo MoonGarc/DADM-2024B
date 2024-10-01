@@ -11,6 +11,21 @@ const items = ref([
 ]);
 const newItem = ref("");
 const newItemHighPriority = ref(false);
+
+// Función para agregar un nuevo artículo a la lista
+const addItem = () => {
+  if (newItem.value.trim() !== "") {
+    const label = newItemHighPriority.value
+      ? `⚡ ${newItem.value}` // Añadir un icono de alta prioridad si está marcado
+      : newItem.value;
+    items.value.push({
+      id: items.value.length + 1,
+      label: label,
+    });
+    newItem.value = ""; // Limpiar el campo de entrada
+    newItemHighPriority.value = false; // Resetear la prioridad
+  }
+};
 </script>
 
 <template>
@@ -19,7 +34,11 @@ const newItemHighPriority = ref(false);
   <!-- Agrupando entradas de usuario -->
   <div class="add-item form">
     <!-- Entrada de texto -->
-    <input type="text" placeholder="Add Item" v-model.trim="newItem" />
+    <input 
+      type="text" 
+      placeholder="Add Item" 
+      v-on:keyup.enter="addItem" 
+      v-model.trim="newItem" />
     
     <!-- Caja de selección de prioridad -->
     <label>
@@ -29,7 +48,7 @@ const newItemHighPriority = ref(false);
     <!-- Botón -->
     <button 
       class="btn btn-primary" 
-      v-on:click="items.push({ id: items.length + 1, label: newItem })">
+      v-on:click="addItem">
       Salvar Artículo
     </button>
   </div>
