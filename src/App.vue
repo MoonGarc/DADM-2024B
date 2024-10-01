@@ -3,7 +3,7 @@
       <i class="material-icons shopping-cart-icon">local_mall</i>
       {{ header }}
     </h1>
-    <input type="text" placeholder="Add Item" v-model.lazy="newItem">
+    <input type="text" placeholder="Add Item" v-model.trim="newItem">
     {{ newItem }}
     <ul>
       <li v-for="{ id, label } in items" v-bind:key="id">
