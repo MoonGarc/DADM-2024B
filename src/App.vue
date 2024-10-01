@@ -4,7 +4,18 @@
       {{ header }}
     </h1>
     <input type="text" placeholder="Add Item" v-model.trim="newItem">
+    
+    <!-- Radio Buttons -->
+    <label>
+      <input type="radio" v-model="newItemPriority" value="low">Low
+    </label>
+    <label>
+      <input type="radio" v-model="newItemPriority" value="high">High
+    </label>
+  
     {{ newItem }}
+    <p>{{ newItemPriority }}</p>
+  
     <ul>
       <li v-for="{ id, label } in items" v-bind:key="id">
         ⚜ {{ label }}
@@ -23,6 +34,7 @@
     { id: '3', label: '1 nutella' },
   ]);
   const newItem = ref('');
+  const newItemPriority = ref('low');
   </script>
   
   <style scoped>
