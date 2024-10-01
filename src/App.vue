@@ -17,7 +17,7 @@ const newItemHighPriority = ref(false);
   <h1>{{ header }}</h1>
   
   <!-- Agrupando en un div las entradas -->
-  <form v-on:submit="items.push({ id: items.length + 1, label: newItem })" class="add-item form">
+  <form v-on:submit.prevent="items.push({ id: items.length + 1, label: newItem })" class="add-item form">
     <!-- Entrada de texto -->
     <input
       v-model.trim="newItem"
@@ -32,9 +32,7 @@ const newItemHighPriority = ref(false);
     </label>
     
     <!-- Botón -->
-    <button
-      class="btn btn-primary"
-    >
+    <button class="btn btn-primary">
       Save Item
     </button>
   </form>
@@ -44,4 +42,3 @@ const newItemHighPriority = ref(false);
     <li v-for="({ id, label }) in items" :key="id">⚜ {{ label }}</li>
   </ul>
 </template>
-
