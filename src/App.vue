@@ -1,44 +1,57 @@
 <script setup>
-// Este código está utilizando Vue 3 <script setup>
-// Más información en https://vuejs.org/api/sfc-script-setup.html#script-setup
-import { ref } from "vue";
-
-const header = ref("🛒 Shopping List App");
+import { ref } from 'vue';
+// Modelo
+const header = ref('App lista de compras');
+//---items----
+//Item-model
 const items = ref([
-  { id: 1, label: "10 bolillos" },
-  { id: 2, label: "1 lata de frijoles" },
-  { id: 3, label: "2 latas de atún" },
+  {id:'0', label: '10 bolillos'},
+  {id:'1', label: '1 chela'},
+  {id:'2', label: 'leche'},
+  {id:'3', label: '1 nutella'}
 ]);
+//Item-Method
+const saveItem = ()=> {
+  //Add new item
+  items.value.push({id: items.value.length+1,label : newItem.value});
+  //Clean the input
+};
 const newItem = ref("");
 const newItemHighPriority = ref(false);
+
 </script>
-
+ 
 <template>
-  <h1>{{ header }}</h1>
-  
-  <!-- Agrupando en un div las entradas -->
-  <form v-on:submit.prevent="items.push({ id: items.length + 1, label: newItem })" class="add-item form">
-    <!-- Entrada de texto -->
-    <input
-      v-model.trim="newItem"
-      type="text"
-      placeholder="Add Item"
-    />
-    
-    <!-- Caja de selección de prioridad -->
-    <label>
-      <input type="checkbox" v-model="newItemHighPriority" />
-      High Priority
-    </label>
-    
-    <!-- Botón -->
-    <button class="btn btn-primary">
-      Save Item
-    </button>
+  <h1>
+   <i class="material-icons shopping-cart-icon">local_mall</i>
+    {{ header }}
+  </h1>
+  <!--Agrupando Entradas de usuario-->
+  <form 
+   class="add-item form"
+   v-on:submit.prevent="saveItem">
+   <!--Entrada de texto-->
+  <input v-model="newItem" type="text" placeholder="Agregar un articulo" />
+  <!--Caja de seleccion de Prioridad-->
+  <label>
+    <input type="checkbox" v-model="newItemHighPriority" />
+    Alta Prioridad
+  </label>
+  <!--Boton-->
+  <button class="btn btn-primary">
+    Salvar Articulo
+  </button>
   </form>
-
-  <!-- Lista -->
+  <ul></ul>
+ 
   <ul>
-    <li v-for="({ id, label }) in items" :key="id">⚜ {{ label }}</li>
+    <li v-for="item in items" :key="item.id"> 🛍️ {{  item.label }} </li>
   </ul>
 </template>
+ 
+<style scoped>
+.shopping-cart-icon{
+  font-size: 2rem;
+}
+</style>
+ 
