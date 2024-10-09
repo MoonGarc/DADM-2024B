@@ -67,6 +67,25 @@ const activeEdition = (activate) => {
     {{ priority ? "🔥": "🛍️"}} {{label}} 
     </li>
   </ul>
+  <!--Lista clases como objetos-->
+  <ul>
+    <li 
+    v-for="{label, id, purchased, priority} in items" 
+    :key="id"
+    class="amazing"
+    :class="{ strikeout: purchased, priority: priority}">
+    {{ priority ? "🔥": "🛍️"}} {{label}} 
+    </li>
+  </ul>
+  <!--Lista como arreglos-->
+  <ul>
+    <li 
+    v-for="{label, id, purchased, priority} in items" 
+    :key="id"
+    :class="[purchased ? 'strikeout': '', priority ? 'priority' : '']">
+        {{ priority ? "🔥": "🛍️"}} {{label}} 
+    </li>
+  </ul>
   <p v-if="items.length === 0"> 🥀 NO HAY ELEMENTOS EN LA LISTA 🥀</p>
 </template>
 
