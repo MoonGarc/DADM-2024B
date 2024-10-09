@@ -41,10 +41,7 @@ const activeEdition = (activate) => {
       Agregar articulo
     </button>
   </div>
-  <!-- Colocando un hiperlink -->
-  <a v-bind:href="newItem === '' ? 'https://www.google.com' : 'https://' + newItem" target="_blank">
-    {{ newItem === '' ? '🖇️Link' : newItem }}
-  </a>
+ 
   <!-- Agrupando Entradas de usuario -->
   <form class="add-item form" v-if="editing" v-on:submit.prevent="saveItem">
     <!-- Entrada de texto -->
@@ -55,7 +52,9 @@ const activeEdition = (activate) => {
       Alta Prioridad
     </label>
     <!-- Boton -->
-    <button class="btn btn-primary">
+    <button
+    :disabled="newItem.length == 0"
+     class="btn btn-primary">
       Salvar Articulo
     </button>
   </form>
