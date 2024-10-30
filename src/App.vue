@@ -1,5 +1,17 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed} from 'vue';
+// This starter template is using Vue 3 <script setup> SFCs
+// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
+// Creando una propiedad computada
+const characterCount = computed(()=>{
+  // Toda propiedad computada debe regresar un valor
+  return newItem.value.length;
+});
+// Creando propiedad computada que invierte items de la lista
+const reversedItems = computed(() => {
+  return [...items.value].reverse(); 
+});
+
 // Modelo
 const header = ref('App lista de compras');
 
@@ -74,18 +86,22 @@ const togglePurchased = (item) => {
     class="btn btn-primary">
       Salvar Articulo
     </button>
+    <!-- Contador -->
+  <p class="counter">
+    {{ characterCount }} / 200
+  </p>
   </form>
+
     <!--LISTA OBJETOS-->
   <!-- Lista -->
   <ul>
-    <li
-      v-for="({ id, label, purchased, priority }, index) in items"
-      @click="togglePurchased(items[index])"
-      v-bind:key="id"
-      :class="{ strikeout: purchased, priority: highPriority }"
-    >
-      ⚜ {{ label }}
-    </li>
+    <li 
+	v-for="({ id, label, purchased, highPriority }, index) in reversedItems"
+  :class="{ strikeout: purchased, priority: highPriority }" 
+	@click="togglePurchased(reversedItems[index])" 
+  v-bind:key="id">
+	  🔹 {{ label }}
+</li>
   </ul>
   <!--LISTA ARREGLOS-->
   <ul>
