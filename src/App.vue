@@ -1,22 +1,36 @@
 <script setup>
 import { ref } from 'vue';
-
 // Modelo
 const header = ref('App lista de compras');
 
 // ---items----
 const items = ref([
-  { id: '0', label: '10 bolillos',purchased: false, priority: true },
+  { id: '0', label: '10 bolillos', purchased: false, priority: true },
   { id: '1', label: '1 chela', purchased: true, priority: true},
   { id: '2', label: 'leche', purchased: false, priority: false },
-  { id: '3', label: '1 nutella', purchased: true, priority: true },
+  { id: '3', label: '1 nutella', purchased: true, priority: true }
 ]);
 
 // Item-Method
+// Metodo para agregar nuevos elementos a la lista
 const saveItem = () => {
-  // Add new item
-  items.value.push({ id: items.value.length + 1, label: newItem.value });
-  newItem.value = ""; // Limpiar el input después de agregar
+  items.value.push({ 
+    id: items.value.length + 1, 
+    label: newItem.value,
+    highPriority: newItemHighPriority.value
+  });
+  // Reiniciendo la entrada de texto
+  newItem.value = "";
+  newItemHighPriority.value = false;
+};
+// Funcion que alterna el valor de la variable editing
+const doEdit = (edit) => {
+  editing.value = edit;
+  // Limpiando la entrada de texto
+  // en caso de que se oculte o muestre
+  // el formulario
+  newItem.value = "";
+  newItemHighPriority.value = false;
 };
 
 // --Formulario---
@@ -25,6 +39,9 @@ const newItemHighPriority = ref(false);
 const editing = ref(true);
 const activeEdition = (activate) => {
   editing.value = activate;
+};// Alternando estado de compra del item
+const togglePurchased = (item) => {
+  item.purchased = !item.purchased;
 };
 </script>
 
@@ -41,7 +58,7 @@ const activeEdition = (activate) => {
       Agregar articulo
     </button>
   </div>
- 
+
   <!-- Agrupando Entradas de usuario -->
   <form class="add-item form" v-if="editing" v-on:submit.prevent="saveItem">
     <!-- Entrada de texto -->
@@ -52,40 +69,31 @@ const activeEdition = (activate) => {
       Alta Prioridad
     </label>
     <!-- Boton -->
-    <button
+    <button 
     :disabled="newItem.length == 0"
-     class="btn btn-primary">
+    class="btn btn-primary">
       Salvar Articulo
     </button>
   </form>
+    <!--LISTA OBJETOS-->
+  <!-- Lista -->
   <ul>
-    <li 
-    v-for="{label, id, purchased, priority} in items" 
-    :key="id"
-    class="amazing"
-    :class="{ strikeout: purchased, priority: priority}">
-    {{ priority ? "🔥": "🛍️"}} {{label}} 
+    <li
+      v-for="({ id, label, purchased, priority }, index) in items"
+      @click="togglePurchased(items[index])"
+      v-bind:key="id"
+      :class="{ strikeout: purchased, priority: highPriority }"
+    >
+      ⚜ {{ label }}
     </li>
   </ul>
-  <!--Lista clases como objetos-->
+  <!--LISTA ARREGLOS-->
   <ul>
-    <li 
-    v-for="{label, id, purchased, priority} in items" 
-    :key="id"
-    class="amazing"
-    :class="{ strikeout: purchased, priority: priority}">
-    {{ priority ? "🔥": "🛍️"}} {{label}} 
-    </li>
-  </ul>
-  <!--Lista como arreglos-->
-  <ul>
-    <li 
-    v-for="{label, id, purchased, priority} in items" 
-    :key="id"
-    :class="[purchased ? 'strikeout': '', priority ? 'priority' : '']">
-        {{ priority ? "🔥": "🛍️"}} {{label}} 
-    </li>
-  </ul>
+  <li 
+  v-for="{ id, label, purchased } in items" 
+  v-bind:key="id"
+  :class="{strikeout: purchased}">🔹 {{ label }}</li>
+</ul>
   <p v-if="items.length === 0"> 🥀 NO HAY ELEMENTOS EN LA LISTA 🥀</p>
 </template>
 
