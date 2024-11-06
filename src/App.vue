@@ -1,11 +1,13 @@
 <script setup>
 import planItem from './components/plan-item.vue';
+import { ref } from 'vue';
+const plans = ref(['El cafetero','El chelero', 'El intelectual']);
 </script>
 
 <template>
   <header>
     <div>
-      <span id="logo">ITGAM BOX EXPERIENCES</span>
+      <span id="logo">Liquid Gold Box</span>
       <img src="./assets/logo.png" alt="logo">
     </div>
   </header>
@@ -18,9 +20,9 @@ import planItem from './components/plan-item.vue';
     </h2>
 
     <div class="plans">
-      <plan-item>El soltero</plan-item>
-      <plan-item>El curioso</plan-item>
-      <plan-item>El adicto</plan-item>
+      <plan-item v-for="plan in plans" 
+      :key="plan"
+      :name="plan"/>
     </div>
   </div>
 </template>
