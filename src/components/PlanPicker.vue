@@ -22,7 +22,7 @@ selectedPlan.value = name;
     :selected-plan="selectedPlan" />
 
 </div>
-<p> {{ selectedPlan }}</p>
+
 </template>
 
 <style scoped>

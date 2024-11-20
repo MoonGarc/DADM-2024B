@@ -1,5 +1,7 @@
 <template>
-  <div @click="selectedPlan" class="plan">
+  <div @click="selectedPlan"
+   class="plan"
+   :class="{ selected: isSelected}">
     <div class="description">
       <span class="title">
          {{ name }} {{ isSelected ? '🌟' : '' }}  </span>

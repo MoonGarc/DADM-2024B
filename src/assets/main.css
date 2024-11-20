@@ -503,6 +503,11 @@ span#logo {
   line-height: 1.5;
 }
 
+.plans .selected{
+background-color: #B3CFD0;
+color: #fff;
+}
+
 .plans .plan > .price {
   width: 20%;
   color: #09848d;
