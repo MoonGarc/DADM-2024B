@@ -1,12 +1,11 @@
 <script setup>
-import fancyButton from './components/FancyButton.vue';
+import FancyButton from './components/FancyButton.vue';
 </script>
 
 <template>
   <div class="content">
-    <fancy-button />
+    <fancy-button>
+      Enviar 
+    </fancy-button>
   </div>
 </template>
-
-<style scoped>
-</style>
