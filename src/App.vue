@@ -5,7 +5,7 @@ import FancyButton from './components/FancyButton.vue';
 <template>
   <div class="content">
     <fancy-button>
-      Submit 
+      Hazme Clic
     </fancy-button>
   </div>
 </template>

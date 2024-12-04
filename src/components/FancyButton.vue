@@ -1,6 +1,6 @@
 <template>
     <button> 
-      <slot>Submit</slot> 
-      <slot>Submit</slot> 
+      <slot name="icon">➡️</slot>
+      <slot>Submit</slot>
     </button>
   </template>
