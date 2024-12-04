@@ -5,7 +5,7 @@ import FancyButton from './components/FancyButton.vue';
 <template>
   <div class="content">
     <fancy-button>
-      Enviar 
+      <strong>E</strong>nviar 
     </fancy-button>
   </div>
 </template>
